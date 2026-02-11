@@ -2,7 +2,7 @@
 name = "fintech-app"
 version = "0.1.0"
 description = "Production-style FastAPI fintech application consuming a custom Elixir RDBMS"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 
 dependencies = [
     "fastapi",
@@ -11,6 +11,10 @@ dependencies = [
     "pydantic",
     "python-jose",
 ]
+
+[project.optional-dependencies]
+dev = ["python-dotenv"]
+
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

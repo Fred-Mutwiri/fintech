@@ -253,3 +253,67 @@ All architectural decisions, reasoning, and final code are human-reviewed and in
 Setup instructions will be added once the application bootstrapping is implemented.
 
 This initial commit establishes boundaries and architecture only.
+
+
+
+# Configuration Model
+
+Configuration is treated as a first-class boundary.
+
+The application must fail fast on invalid or incomplete configuration.
+
+No implicit defaults are allowed for security-sensitive values.
+
+## Required Environment Variables
+
+APP_ENV
+    development | staging | production
+
+APP_PORT
+    Integer. Port for HTTP server.
+
+DB_BASE_URL
+    Base URL of Elixir RDBMS HTTP API.
+
+DB_TIMEOUT_SECONDS
+    Positive integer.
+
+JWT_SECRET
+    Non-empty string. Must not use default value in production.
+
+JWT_ALGORITHM
+    Must match supported algorithm list.
+
+## Startup Validation
+
+At startup:
+
+- All required variables must exist.
+- Values must pass validation constraints.
+- Production mode must reject insecure defaults.
+- Configuration is immutable after load.
+
+If validation fails, application must terminate.
+
+Rationale:
+
+Fintech systems must never run in partially configured states.
+
+## Environment Variable Loading
+
+The application reads configuration exclusively from process
+environment variables.
+
+### `.env` Files
+
+`.env` files are supported **only in development and test environments**
+as a local developer convenience.
+
+They are **not** used in production.
+
+Rationale:
+- Production systems must not depend on filesystem-based secrets
+- Environment variables are the explicit configuration boundary
+
+If `.env` support is removed or misconfigured, the application must fail
+fast at startup.
