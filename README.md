@@ -320,3 +320,129 @@ fast at startup.
 
 
 
+
+---
+
+## Domain Model Overview
+
+The domain layer models financial concepts independently of:
+
+* HTTP transport
+* Database representation
+* SQL schema
+* Authentication mechanisms
+
+It defines:
+
+* Core entities (Merchant, Payment, LedgerEntry)
+* Value objects (Money, Currency)
+* Domain invariants
+* State transitions
+
+The domain layer must not:
+
+* Call the database
+* Construct SQL
+* Import FastAPI
+* Depend on infrastructure modules
+
+All persistence concerns are external to the domain.
+
+---
+
+## Financial Modeling Principles
+
+1. Money is represented using integers (minor units).
+2. Currency is explicit.
+3. Payment states are finite and explicit.
+4. Balances are derived from ledger entries.
+5. Domain logic must be deterministic and side-effect free.
+
+Rationale:
+
+Financial correctness depends on eliminating ambiguity in state transitions and monetary representation.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

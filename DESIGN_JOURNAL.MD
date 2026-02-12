@@ -50,3 +50,21 @@ Reasoning:
 
 Failure mode:
 - Missing environment variables cause immediate startup failure.
+
+
+
+## Entry 4 — Domain Language Before Infrastructure Usage
+
+Key decisions:
+
+* Money is stored as integer minor units
+* Balance is derived, not mutable
+* Payments have explicit state machine
+* Domain is infrastructure-agnostic
+
+Rationale:
+
+Financial systems fail when domain logic is entangled with transport or persistence.
+We define the language of truth before persisting it.
+
+---
